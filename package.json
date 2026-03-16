@@ -1,0 +1,25 @@
+{
+    "name": "@dre44/smithy-react-client",
+    "version": "0.0.1",
+    "description": "",
+    "type": "module",
+    "scripts": {
+        "tc": "tsc --noEmit",
+        "tc:watch": "tsc --noEmit --watch",
+        "prebuild": "rm -rf dist",
+        "build": "tsc",
+        "test": "tsx test/main.ts"
+    },
+    "main": "./dist/index.js",
+    "keywords": [],
+    "author": "André Thomas",
+    "license": "ISC",
+    "dependencies": {
+        "swr": "^2.4.1"
+    },
+    "devDependencies": {
+        "@smithy/smithy-client": "^4.12.3",
+        "@types/node": "^22.14.1",
+        "@types/react": "^19.2.14"
+    }
+}
