@@ -5,15 +5,15 @@ import { useSmithyClient } from "./client-provider.js";
 import { createInfiniteSender } from "./sender.js";
 import type { Disabled } from "./types.js";
 import type { ServiceException } from "@smithy/smithy-client";
-import type { AnyCommand, CommandCtor, CommandInput, CommandOptions, CommandOutput } from "./system-types.js";
+import type { AnyCommand, CommandCtor, CommandInput, SendOptions, CommandOutput } from "./commad-types.js";
 
 export type UseInfinite<TOutput = any> = SWRInfiniteResponse<TOutput, ServiceException>;
 
-export type UseInfiniteOptions<C extends AnyCommand> = {
+export type UseInfiniteOptions<C extends AnyCommand = AnyCommand> = {
     clientId?: string;
     swr?: SWRInfiniteConfiguration<CommandOutput<C>, ServiceException>;
     disabled?: boolean;
-    options?: CommandOptions<C>;
+    sendOptions?: SendOptions<C>;
 };
 
 export type InfiniteInputFactory<C extends AnyCommand> = (
@@ -46,13 +46,13 @@ export type InfiniteInputFactory<C extends AnyCommand> = (
 export function useInfinite<C extends AnyCommand>(
     Command: CommandCtor<C>,
     inputFactory: InfiniteInputFactory<C> | Disabled,
-    { disabled, clientId, swr, options }: UseInfiniteOptions<C> = {},
+    { disabled, clientId, swr, sendOptions }: UseInfiniteOptions<C> = {},
 ): UseInfinite<CommandOutput<C>> {
     const { client } = useSmithyClient(clientId);
 
     const { getKey, fetcher } =
         inputFactory && !disabled
-            ? createInfiniteSender(client, Command, inputFactory, options)
+            ? createInfiniteSender(client, Command, inputFactory, sendOptions)
             : { getKey: () => null, fetcher: () => Promise.resolve([]) };
 
     const infinite = useSWRInfinite<CommandOutput<C>, ServiceException>(getKey, fetcher, {

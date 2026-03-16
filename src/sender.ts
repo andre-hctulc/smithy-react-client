@@ -1,5 +1,5 @@
 import type { ClientType } from "./client.js";
-import type { AnyCommandCtor, CommandInput, CommandOptions } from "./system-types.js";
+import type { AnyCommandCtor, CommandInput, SendOptions } from "./commad-types.js";
 import type { SmithyReactClientCacheKey } from "./types.js";
 
 export type CreateQuerySenderResult = {
@@ -11,17 +11,17 @@ export function createQuerySender(
     client: ClientType,
     Command: AnyCommandCtor,
     commandInput: CommandInput,
-    options: CommandOptions,
+    sendOptions: SendOptions,
 ): CreateQuerySenderResult {
     const key: SmithyReactClientCacheKey = {
         smithyReactClient: true,
-        commandName: Command.constructor.name,
+        commandName: Command.name,
         commandInput,
         type: "query",
     };
 
     const sender = ({ commandInput }: SmithyReactClientCacheKey) => {
-        return client.send(new Command(commandInput), options);
+        return client.send(new Command(commandInput), sendOptions);
     };
 
     return {
@@ -38,17 +38,17 @@ export type CreateMutationSenderResult = {
 export function createMutationSender(
     client: ClientType,
     Command: AnyCommandCtor,
-    options: CommandOptions,
+    sendOptions: SendOptions,
 ): CreateMutationSenderResult {
     const key: SmithyReactClientCacheKey = {
         smithyReactClient: true,
-        commandName: Command.constructor.name,
+        commandName: Command.name,
         commandInput: {},
         type: "mutation",
     };
 
     const sender = ({}: SmithyReactClientCacheKey, input: { arg: CommandInput }) => {
-        return client.send(new Command(input.arg), options);
+        return client.send(new Command(input.arg), sendOptions);
     };
 
     return {
@@ -66,7 +66,7 @@ export function createInfiniteSender<TInput = any, TOutput = any>(
     client: ClientType,
     Command: AnyCommandCtor,
     inputFactory: (pageIndex: number, previousPageData: TOutput | null) => TInput | null,
-    options?: CommandOptions,
+    sendOptions?: SendOptions,
 ): CreateInfiniteSenderResult {
     const getKey = (
         pageIndex: number,
@@ -80,14 +80,14 @@ export function createInfiniteSender<TInput = any, TOutput = any>(
 
         return {
             smithyReactClient: true,
-            commandName: Command.constructor.name,
+            commandName: Command.name,
             commandInput,
             type: "infinite",
         };
     };
 
     const fetcher = (key: SmithyReactClientCacheKey) => {
-        return client.send(new Command(key.commandInput), options);
+        return client.send(new Command(key.commandInput), sendOptions);
     };
 
     return {

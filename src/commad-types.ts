@@ -6,7 +6,9 @@ export type CommandCtor<C extends AnyCommand = AnyCommand> = new (input: Command
 
 export type CommandOutput<C extends AnyCommand = AnyCommand> =
     C extends Command<any, infer O, any, any, any> ? O : never;
+
 export type CommandInput<C extends AnyCommand = AnyCommand> =
     C extends Command<infer I, any, any, any, any> ? I : never;
-export type CommandOptions<C extends AnyCommand = AnyCommand> =
-    C extends Command<any, any, infer O, any, any> ? O : never;
+
+export type SendOptions<C extends AnyCommand = AnyCommand> =
+    C extends Command<any, any, infer O, any, any> ? O : Record<string, any>;

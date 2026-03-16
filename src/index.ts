@@ -10,3 +10,4 @@ export * from "./use-mutation.js";
 export * from "./types.js";
 export * from "./use-cache.js";
 export type { SmithyAnnotations } from "./client.js";
+export type * from "./commad-types.js";
