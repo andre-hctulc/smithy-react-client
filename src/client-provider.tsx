@@ -24,7 +24,7 @@ export function useSmithyClient(clientId?: string): SmithyReactClientContext {
             if (context.clientId === clientId) return context;
             context = context.parentContext;
         }
-        throw new Error("No `SmithyClientContext` with the given id found");
+        throw new Error("No `SmithyReactClientContext` with the given id found");
     }
 
     return context;
