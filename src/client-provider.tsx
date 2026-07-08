@@ -37,9 +37,6 @@ export interface SmithyReactClientProviderProps {
     clientId?: string;
 }
 
-/**
- * Lets you configure the default requestInit useXFetch hooks in the component tree.
- */
 export const SmithyReactClientProvider: FC<SmithyReactClientProviderProps> = ({
     children,
     client,
@@ -48,17 +45,17 @@ export const SmithyReactClientProvider: FC<SmithyReactClientProviderProps> = ({
 }) => {
     const parentContext = useContext(SmithyReactClientContext);
 
-    const prov = (
-        <SmithyReactClientContext.Provider
-            value={{
-                client,
-                clientId,
-                parentContext,
-            }}
-        >
-            {children}
-        </SmithyReactClientContext.Provider>
+    return (
+        <SWRConfig value={{ ...baseSwrConfig, ...swrConfig }}>
+            <SmithyReactClientContext.Provider
+                value={{
+                    client,
+                    clientId,
+                    parentContext,
+                }}
+            >
+                {children}
+            </SmithyReactClientContext.Provider>
+        </SWRConfig>
     );
-
-    return <SWRConfig value={{ ...baseSwrConfig, ...swrConfig }}>{prov}</SWRConfig>;
 };

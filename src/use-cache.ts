@@ -1,3 +1,5 @@
+"use client";
+
 import { useSWRConfig } from "swr";
 import { useCallback } from "react";
 import { isCacheKey } from "./helpers.js";
