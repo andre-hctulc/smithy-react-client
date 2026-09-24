@@ -9,3 +9,5 @@ index.ts
 docs
 scripts
 .env
+.pnpm-lock.yaml
+.pnpm-workspace.yaml
