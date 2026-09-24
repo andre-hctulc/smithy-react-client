@@ -5,9 +5,8 @@ src
 .vscode
 .DS_Store
 index.ts
-.parcel-cache
 docs
 scripts
 .env
-.pnpm-lock.yaml
-.pnpm-workspace.yaml
+pnpm-lock.yaml
+pnpm-workspace.yaml
