@@ -1,7 +1,7 @@
 export * from "./helpers.js";
 export {
     SmithyReactClientProvider,
-    type SmithyReactClientContext,
+    type SmithyReactClientContextValue,
     useSmithyClient,
 } from "./client-provider.js";
 export * from "./use-query.js";

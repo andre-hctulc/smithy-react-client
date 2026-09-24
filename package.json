@@ -18,8 +18,10 @@
         "swr": "^2.4.1"
     },
     "devDependencies": {
-        "@smithy/smithy-client": "^4",
         "@types/node": "^22",
         "@types/react": "^19"
+    },
+    "peerDependencies": {
+        "@smithy/smithy-client": "^4"
     }
 }

@@ -11,9 +11,8 @@ import type { Client } from "@smithy/smithy-client";
  *   }
  * }
  */
-export interface SmithyAnnotations {
-}
+export interface SmithyAnnotations {}
 
-type AnyClient = Client<any, any, any, any>;
+export type AnyClient = Client<any, any, any, any>;
 
 export type ClientType = SmithyAnnotations extends { client: infer C } ? C : AnyClient;
