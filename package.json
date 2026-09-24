@@ -1,7 +1,7 @@
 {
     "name": "@dre44/smithy-react-client",
     "packageManager": "pnpm@11.13.1",
-    "version": "0.7.0",
+    "version": "0.8.0",
     "description": "",
     "type": "module",
     "scripts": {
