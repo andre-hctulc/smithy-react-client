@@ -12,7 +12,7 @@ importers:
         specifier: ^4
         version: 4.15.2
       swr:
-        specifier: ^2.4.1
+        specifier: ^2
         version: 2.5.1(react@19.3.0)
     devDependencies:
       '@types/node':

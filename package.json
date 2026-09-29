@@ -16,7 +16,7 @@
     "author": "André Thomas",
     "license": "ISC",
     "dependencies": {
-        "swr": "^2.4.1"
+        "swr": "^2"
     },
     "devDependencies": {
         "@types/node": "^22",
